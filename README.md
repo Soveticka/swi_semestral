@@ -1,0 +1,1 @@
+![Wireframe](http://uni.soveticka.eu/swi/wireframe.png)
