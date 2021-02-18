@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.MenuButton?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Text?>
+
+
+<Pane maxHeight="600" maxWidth="800" minHeight="600" minWidth="800" prefHeight="600" prefWidth="800" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cz.osu.kip.swi.controllers.registration">
+   <children>
+      <TextField fx:id="firstname" layoutX="72.0" layoutY="135.0" />
+      <Text layoutX="72.0" layoutY="131.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Jméno*" />
+      <Text layoutX="72.0" layoutY="62.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Registrační formulář" wrappingWidth="140.25820922851562" />
+      <TextField fx:id="lastname" layoutX="72.0" layoutY="188.0" />
+      <Text layoutX="72.0" layoutY="184.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Příjmení*" />
+      <TextField fx:id="ico" layoutX="72.0" layoutY="244.0" />
+      <Text layoutX="72.0" layoutY="240.0" strokeType="OUTSIDE" strokeWidth="0.0" text="IČO" />
+      <TextField fx:id="email" layoutX="317.0" layoutY="135.0" />
+      <Text layoutX="317.0" layoutY="131.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Email*" />
+      <TextField fx:id="phoneNumber" layoutX="317.0" layoutY="188.0" />
+      <Text layoutX="317.0" layoutY="184.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Telefon*" />
+      <TextField fx:id="address" layoutX="317.0" layoutY="244.0" />
+      <Text layoutX="317.0" layoutY="240.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Ulice + č.p.*" />
+      <TextField fx:id="city" layoutX="317.0" layoutY="301.0" />
+      <Text layoutX="317.0" layoutY="297.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Město*" />
+      <TextField fx:id="zip" layoutX="317.0" layoutY="357.0" />
+      <Text layoutX="317.0" layoutY="353.0" strokeType="OUTSIDE" strokeWidth="0.0" text="PSČ*" />
+      <TextField fx:id="spz" layoutX="573.0" layoutY="301.0" />
+      <Text layoutX="573.0" layoutY="297.0" strokeType="OUTSIDE" strokeWidth="0.0" text="SPZ*" />
+      <TextField fx:id="yearOfProd" layoutX="573.0" layoutY="357.0" />
+      <Text layoutX="573.0" layoutY="353.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Rok výroby*" />
+      <CheckBox fx:id="tow" layoutX="573.0" layoutY="406.0" mnemonicParsing="false" text="Využít odvoz a přívoz vozidla" />
+      <Button layoutX="661.0" layoutY="530.0" mnemonicParsing="false" onAction="#sendData" text="Pokračovat" />
+      <MenuButton fx:id="motor" layoutX="573.0" layoutY="244.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="149.0" text="MenuButton">
+        <items>
+          <MenuItem mnemonicParsing="false" text="Action 1" />
+          <MenuItem mnemonicParsing="false" text="Action 2" />
+        </items>
+      </MenuButton>
+      <MenuButton fx:id="model" layoutX="573.0" layoutY="188.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="149.0" text="MenuButton">
+         <items>
+            <MenuItem mnemonicParsing="false" text="Action 1" />
+            <MenuItem mnemonicParsing="false" text="Action 2" />
+         </items>
+      </MenuButton>
+      <MenuButton fx:id="brand" layoutX="573.0" layoutY="135.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="149.0" text="MenuButton">
+         <items>
+            <MenuItem mnemonicParsing="false" text="Action 1" />
+            <MenuItem mnemonicParsing="false" text="Action 2" />
+         </items>
+      </MenuButton>
+      <Text layoutX="573.0" layoutY="240.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Motor*" />
+      <Text layoutX="573.0" layoutY="183.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Model automobilu*" />
+      <Text layoutX="573.0" layoutY="131.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Značka automobilu*" />
+      <TextField fx:id="description" layoutX="72.0" layoutY="440.0" prefHeight="115.0" prefWidth="395.0" />
+      <Text layoutX="72.0" layoutY="436.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Popis problému" />
+   </children>
+</Pane>
