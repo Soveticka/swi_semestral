@@ -1,1 +1,1 @@
-![Wireframe](http://uni.soveticka.eu/swi/wireframe.png)
+![Wireframe](https://github.com/Soveticka/swi_semestral/blob/main/wireframe.png?raw=true)
