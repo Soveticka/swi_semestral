@@ -114,6 +114,7 @@ public class Registration implements Initializable {
         model.getItems().removeAll(model.getItems());
 
         time.getItems().removeAll(time.getItems());
+
     }
 
 
