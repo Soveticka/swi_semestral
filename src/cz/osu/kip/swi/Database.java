@@ -32,15 +32,21 @@ public class Database {
         }
     }
 
-    public void insertData(String query) {
+    public boolean insertData(String query) {
         Connection con = createConnection();
         try {
             Statement stmt = con.createStatement();
-            stmt.executeUpdate(query);
+            int i = stmt.executeUpdate(query);
             con.close();
+            if(i > 0){
+                return true;
+            } else {
+                return false;
+            }
         } catch (SQLException e) {
             System.out.println(e);
         }
+        return false;
     }
 
     public ResultSet selectData(String query) {
