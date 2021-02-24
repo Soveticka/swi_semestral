@@ -11,12 +11,11 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception{
-        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-
-        double width = screenSize.getWidth()/2;
-        double height = screenSize.getHeight()/2;
+        double width = 800;
+        double height = 600;
 
         Parent root = FXMLLoader.load(getClass().getResource("registration.fxml"));
+
 
         primaryStage.setTitle("Hello World");
         primaryStage.setScene(new Scene(root, width, height));
