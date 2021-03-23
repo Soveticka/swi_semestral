@@ -1,7 +1,6 @@
 package cz.osu.kip.swi.Methods;
 
 import java.util.Calendar;
-import java.util.Date;
 import java.util.regex.Pattern;
 
 public class Validators {

@@ -3,7 +3,6 @@ package cz.osu.kip.swi.Controllers;
 import cz.osu.kip.swi.Methods.Database;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.TextArea;
@@ -11,11 +10,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
-import javax.swing.*;
-import java.net.URL;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ResourceBundle;
 
 public class OrderDetailController {
 
@@ -78,12 +74,6 @@ public class OrderDetailController {
 
     @FXML
     private Button closeButton;
-
-    @FXML
-    void close(ActionEvent event) {
-        Stage stage = (Stage) closeButton.getScene().getWindow();
-        stage.close();
-    }
 
     @FXML
     private Button previousOrder;
@@ -161,5 +151,11 @@ public class OrderDetailController {
         Stage stage = (Stage) closeButton.getScene().getWindow();
         stage.setTitle(String.format("Detail objednávky #%d", orderID));
         loadData();
+    }
+
+    @FXML
+    public void close(ActionEvent event) {
+        Stage stage = (Stage) closeButton.getScene().getWindow();
+        stage.close();
     }
 }

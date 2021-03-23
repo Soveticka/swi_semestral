@@ -1,0 +1,132 @@
+@startuml
+package Controllers <<Frame>> {
+  class OrderCreateController{
+    - fields : applicationFields
+
+    + void initialize(URL url, ResourceBundle resourceBundle)
+    + void actionContinue(ActionEvent event)
+    + void brandSelection(ActionEvent event)
+    + void dateSelection(ActionEvent event)
+  }
+
+  class OrdersViewController{
+    - fields : applicationFields
+
+    + void initialize(OrdersViewController controller)
+    + void loadFromDatabase(QueryModes mode)
+    + void createOrder(ActionEvent event)
+    + void filterOrders(ActionEvent event)
+    + void changeInput(ActionEvent event)
+    + void refreshOrders(ActionEvent event)
+  }
+
+  class OrderEditController{
+    - fields : applicationFields
+
+    + void initialize()
+    + void loadData()
+    + actionUpdate(ActionEvent event)
+    + void brandSelection(ActionEvent event)
+    - void getTimes()
+  }
+
+  class OrderDetailController{
+    - fields : applicationFields
+
+    + void initialize()
+    - void loadData()
+    - void loadPreviousOrder(ActionEvent event)
+    - void loadNextOrder(ActionEvent event)
+    + void close(ActionEvent event)
+  }
+
+  class ErrorController{
+    - errorText : Label
+    - closeButton : Button
+
+    + void setErrorText(String text)
+    + void close(ActionEvent event)
+  }
+}
+
+package Methods <<Frame>> {
+   class Database{
+     - <<static>> Connection createConnection()
+     + <<static>> boolean insertData(String query)
+     + <<static>> ObservableList<Order> getDataOrder(OrdersViewController controller)
+     + <<static>> ResultSet getVehicleBrands()
+     + <<static>> ResultSet getVehicleModelsByBrand(String brand)
+     + <<static>> ResultSet getVehicleModels()
+     + <<static>> ResultSet getUsedTimesAtDate(String date)
+     + <<static>> ResultSet getOrderByID(int orderID)
+     + <<static>> ObservableList<Order> getDataOrder(String query, String filter, OrdersViewController controller)
+     - <<static>> ObservableList<Order> createListOfOrders(ObservableList<Order> list, ResultSet result, OrdersViewController controller)
+   }
+
+   class OrderMethods{
+     + <<static>> void generateModelList(ComboBox<String> brand, ComboBox<String> model)
+     + <<static>> void generateTimesByDate(String date, ComboBox<String> time)
+     + <<static>> LocalDate LOCAL_DATE(String dateString)
+     + <<static>> void callErrorMessage(String message, String title)
+   }
+
+   enum QueryModes{
+     EVERYTHING,
+     FILTERED
+   }
+
+   class Validators{
+     - <<static>> boolean isValid(String regex, String match)
+     + <<static>> boolean isValidEmail(String email)
+     + <<static>> boolean isValidPhoneNumber(String phoneNumber)
+     + <<static>> boolean isValidAddress(String address)
+     + <<static>> boolean isValidCity(String city)
+     + <<static>> boolean isValidZIP(String zip)
+     + <<static>> boolean isValidSPZ(String spz)
+     + <<static>> boolean isValidYearOfProd(String year)
+   }
+}
+
+package Objects <<Frame>> {
+    class Order{
+      - <<get,set>> int orderID;
+      - <<get,set>> String name;
+      - <<get,set>> String phoneNumber;
+      - <<get,set>> String date;
+      - <<get,set>> String time;
+      - <<get,set>> String brand;
+      - <<get,set>> String model;
+      - <<get,set>> String status;
+      - <<get,set>> final Button btnShow;
+      - <<get,set>> final Button btnEdit;
+      - <<get,set>> final OrdersViewController controller;
+
+      + <<cons>> Order(...)
+      - Button createButtonEdit()
+      - Button createButtonShow()
+    }
+}
+
+OrdersViewController "1" *-up- "many" Order: Composition
+OrdersViewController -- OrderMethods
+OrdersViewController -- Database
+OrdersViewController "1" o-- "many" OrderCreateController: Aggregation
+OrdersViewController "1" o-- "many" OrderEditController: Aggregation
+OrdersViewController "1" o-- "many" OrderDetailController: Aggregation
+OrdersViewController <- QueryModes
+
+OrderCreateController "1" o- "1" ErrorController: Aggregation
+OrderCreateController -- Database
+OrderCreateController -- OrderMethods
+OrderCreateController -- Validators
+
+OrderEditController -- Database
+
+OrderEditController "1" o- "1" ErrorController: Aggregation
+OrderEditController -- Database
+OrderEditController -- OrderMethods
+OrderEditController -- Validators
+
+
+
+@enduml

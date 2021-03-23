@@ -12,6 +12,9 @@ import javafx.stage.Stage;
 import java.awt.*;
 
 public class Main extends Application {
+    // TODO Potvrzování změn
+    //      - Model, Značka vyhledávání
+    //      - ?
 
     @Override
     public void start(Stage primaryStage) throws Exception{

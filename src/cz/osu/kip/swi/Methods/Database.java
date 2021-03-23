@@ -6,8 +6,6 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 import java.sql.*;
-import java.time.LocalDate;
-import java.util.ArrayList;
 
 public class Database {
 
@@ -24,19 +22,6 @@ public class Database {
             System.out.println(e);
         }
         return null;
-    }
-
-    public static void insertData(String name, String lastname) {
-        Connection con = createConnection();
-        try {
-            Statement stmt = con.createStatement();
-            String query = String.format("INSERT INTO testTable (name, lastname) VALUES('%s', '%s')", name, lastname);
-            stmt.executeUpdate(query);
-            con.close();
-            System.out.printf("User %s %s was successfully added to the Database%n", name, lastname);
-        } catch (SQLException e) {
-            System.out.println(e);
-        }
     }
 
     public static boolean insertData(String query) {
@@ -56,28 +41,18 @@ public class Database {
         return false;
     }
 
-    public static ResultSet selectData(String query) {
-        Connection con = createConnection();
-        try {
-            Statement stmt = con.createStatement();
-            return stmt.executeQuery(query);
-        } catch (SQLException e) {
-            System.out.println(e);
-        }
-        return null;
-    }
-
     public static ObservableList<Order> getDataOrder(OrdersViewController controller) {
         Connection con = createConnection();
         ObservableList<Order> list = FXCollections.observableArrayList();
         try {
             Statement stmt = con.createStatement();
             ResultSet result = stmt.executeQuery("SELECT * FROM orders");
-
+            con.close();
             return createListOfOrders(list, result, controller);
         } catch (SQLException e) {
             System.out.println(e);
         }
+
         return null;
     }
 
@@ -85,7 +60,7 @@ public class Database {
         Connection con = createConnection();
         try {
             Statement stmt = con.createStatement();
-            return stmt.executeQuery("SELECT brand FROM vehicleBrand");
+            return stmt.executeQuery("SELECT brand FROM vehicleBrand ORDER BY brand");
         } catch (SQLException e) {
             System.out.println(e);
         }
@@ -96,8 +71,21 @@ public class Database {
         Connection con = createConnection();
         try {
             Statement stmt = con.createStatement();
-            return stmt.executeQuery(String.format("SELECT model FROM vehicleModel WHERE vehicleBrand_brand='%s'", brand));
+            ResultSet result = stmt.executeQuery(String.format("SELECT model FROM vehicleModel WHERE vehicleBrand_brand='%s'", brand));
+            con.close();
+            return result;
         } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return null;
+    }
+
+    public static ResultSet getVehicleModels(){
+        Connection con = createConnection();
+        try{
+            Statement stmt = con.createStatement();
+            return stmt.executeQuery("SELECT model FROM vehicleModel ORDER BY model");
+        } catch(SQLException e){
             System.out.println(e);
         }
         return null;
@@ -118,7 +106,9 @@ public class Database {
         Connection con = createConnection();
         try {
             Statement stmt = con.createStatement();
-            return stmt.executeQuery(String.format("SELECT * FROM orders WHERE id='%d'", orderID));
+            ResultSet result = stmt.executeQuery(String.format("SELECT * FROM orders WHERE id='%d'", orderID));
+            con.close();
+            return result;
         } catch (SQLException e) {
             System.out.println(e);
         }
@@ -162,6 +152,7 @@ public class Database {
         try {
             Statement stmt = con.createStatement();
             ResultSet result = stmt.executeQuery(sqlQuery);
+            con.close();
             return createListOfOrders(list, result, controller);
         } catch (SQLException e) {
             System.out.println(e);

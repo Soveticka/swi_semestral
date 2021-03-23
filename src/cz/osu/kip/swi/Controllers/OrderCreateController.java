@@ -2,22 +2,20 @@ package cz.osu.kip.swi.Controllers;
 
 import cz.osu.kip.swi.Methods.OrderMethods;
 import cz.osu.kip.swi.Methods.QueryModes;
-import cz.osu.kip.swi.Methods.Validators;
 import javafx.event.ActionEvent;
 
-import java.io.IOException;
 import java.net.URL;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Scene;
+import javafx.scene.Node;
 import javafx.scene.control.*;
 
 import cz.osu.kip.swi.Methods.Database;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
 public class OrderCreateController implements Initializable {
@@ -75,7 +73,7 @@ public class OrderCreateController implements Initializable {
     @FXML
     private Button createOrder;
 
-    public void setParentController(OrdersViewController parentController){
+    public void setParentController(OrdersViewController parentController) {
         this.parentController = parentController;
     }
 
@@ -100,88 +98,47 @@ public class OrderCreateController implements Initializable {
 
 
     @FXML
-    void actionContinue(ActionEvent event) {
-        String errorMessage = "";
-        if (!firstName.getText().equals("") && !lastName.getText().equals("") && !emailAddress.getText().equals("") && !phoneNumber.getText().equals("") && !address.getText().equals("") && !city.getText().equals("") && !zip.getText().equals("") && !brand.getSelectionModel().isEmpty() && !model.getSelectionModel().isEmpty() && !spz.getText().equals("") && !yearOfProd.getText().equals("")) {
-            if (!time.getSelectionModel().isEmpty() && date.getValue() != null) {
-                if (Validators.isValidEmail(emailAddress.getText())) {
-                    if (Validators.isValidPhoneNumber(phoneNumber.getText())) {
-                        if (Validators.isValidAddress(address.getText())) {
-                            if (Validators.isValidCity(city.getText())) {
-                                if (Validators.isValidZIP(zip.getText())) {
-                                    if (Validators.isValidSPZ(spz.getText())) {
-                                        if (Validators.isValidYearOfProd(yearOfProd.getText())) {
-                                            if (!time.getValue().equals("Všechny časy jsou zabrány")) {
-                                                String towBool = null;
-                                                String query = null;
-                                                if (tow.isSelected()) {
-                                                    towBool = "Ano";
-                                                } else {
-                                                    towBool = "Ne";
-                                                }
-                                                if (!ico.getText().equals("")) {
-                                                    query = String.format("INSERT INTO orders(firstname, lastname, emailAddress, phoneNumber, dateI, timeI, ico, city, address, zip, vehiclebrand, vehiclemodel, spz, yearOfProduction, tow, description) VALUES('%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%d','%s','%s')", firstName.getText(), lastName.getText(), emailAddress.getText(), phoneNumber.getText(), date.getValue(), time.getValue(), ico.getText(), city.getText(), address.getText(), zip.getText(), brand.getValue(), model.getValue(), spz.getText(), Integer.parseInt(yearOfProd.getText()), towBool, description.getText());
-                                                } else {
-                                                    query = String.format("INSERT INTO orders(firstname, lastname, emailAddress, phoneNumber, dateI, timeI, city, address, zip, vehiclebrand, vehiclemodel, spz, yearOfProduction, tow, description)  VALUES('%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%d','%s','%s')", firstName.getText(), lastName.getText(), emailAddress.getText(), phoneNumber.getText(), date.getValue(), time.getValue(), city.getText(), address.getText(), zip.getText(), brand.getValue(), model.getValue(), spz.getText(), Integer.parseInt(yearOfProd.getText()), towBool, description.getText());
-                                                }
-
-                                                if (Database.insertData(query)) {
-                                                    parentController.loadFromDatabase(QueryModes.EVERYTHING);
-                                                    OrderMethods.callErrorMessage("Objednávka byla úspěšně vytvořena", "Informace");
-                                                    Stage stage = (Stage) createOrder.getScene().getWindow();
-                                                    stage.close();
-                                                } else {
-                                                    errorMessage = "Při vytváření objednávky nastala chyba";
-                                                }
-                                            } else {
-                                                errorMessage = "Je nutné vybrat jiný datum a čas";
-                                            }
-                                        } else {
-                                            errorMessage = "Neplatný rok výroby";
-                                        }
-                                    } else {
-                                        errorMessage = "SPZ je neplatná";
-                                    }
-                                } else {
-                                    errorMessage = "PSČ je krátké nebo příliš dlouhé";
-                                }
-                            } else {
-                                errorMessage = "Město je neplatné";
-                            }
-                        } else {
-                            errorMessage = "Adresa je neplatná";
-                        }
-                    } else {
-                        errorMessage = "Neplatné telefonní číslo";
-                    }
-                } else {
-                    errorMessage = "Neplatný email";
-                }
+    public void actionContinue(ActionEvent event) {
+        if (OrderMethods.inputChecks(firstName, lastName, emailAddress, phoneNumber, address, city, zip, brand, model, spz, yearOfProd, time, date)) {
+            String errorMessage;
+            String towBool = null;
+            String query = null;
+            if (tow.isSelected()) {
+                towBool = "Ano";
             } else {
-                errorMessage = "Je nutno vybrat datum a čas";
-
+                towBool = "Ne";
             }
-        } else {
-            errorMessage = "Je nutno vyplnit všechny povinné údaje (*)";
-        }
+            if (!ico.getText().equals("")) {
+                query = String.format("INSERT INTO orders(firstname, lastname, emailAddress, phoneNumber, dateI, timeI, ico, city, address, zip, vehiclebrand, vehiclemodel, spz, yearOfProduction, tow, description) VALUES('%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%d','%s','%s')", firstName.getText(), lastName.getText(), emailAddress.getText(), phoneNumber.getText(), date.getValue(), time.getValue(), ico.getText(), city.getText(), address.getText(), zip.getText(), brand.getValue(), model.getValue(), spz.getText(), Integer.parseInt(yearOfProd.getText()), towBool, description.getText());
+            } else {
+                query = String.format("INSERT INTO orders(firstname, lastname, emailAddress, phoneNumber, dateI, timeI, city, address, zip, vehiclebrand, vehiclemodel, spz, yearOfProduction, tow, description)  VALUES('%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%d','%s','%s')", firstName.getText(), lastName.getText(), emailAddress.getText(), phoneNumber.getText(), date.getValue(), time.getValue(), city.getText(), address.getText(), zip.getText(), brand.getValue(), model.getValue(), spz.getText(), Integer.parseInt(yearOfProd.getText()), towBool, description.getText());
+            }
 
-        if (!errorMessage.equals("")) {
-            OrderMethods.callErrorMessage(errorMessage, "Chybová hláška");
+            if (Database.insertData(query)) {
+                parentController.loadFromDatabase(QueryModes.EVERYTHING);
+                OrderMethods.callErrorMessage("Objednávka byla úspěšně vytvořena", "Informace");
+                Stage stage = (Stage) createOrder.getScene().getWindow();
+                stage.close();
+            } else {
+                errorMessage = "Při vytváření objednávky nastala chyba";
+                OrderMethods.callErrorMessage(errorMessage, "Chybová hláška");
+            }
         }
     }
 
     @FXML
-    void brandSelection(ActionEvent event) {
+    public void brandSelection(ActionEvent actionEvent) {
         OrderMethods.generateModelList(brand, model);
-    }
-
-    @FXML
-    void timeSelection(ActionEvent event) {
-
     }
 
     @FXML
     public void dateSelection(ActionEvent actionEvent) {
         OrderMethods.generateTimesByDate(date.getValue().toString(), time);
+    }
+
+
+    public void resetColor(MouseEvent mouseEvent) {
+        Node toReset = (Node) mouseEvent.getSource();
+        toReset.setStyle(null);
     }
 }

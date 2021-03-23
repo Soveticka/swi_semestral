@@ -5,6 +5,8 @@ import cz.osu.kip.swi.Main;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.DatePicker;
+import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.Region;
 import javafx.stage.Modality;
@@ -39,7 +41,6 @@ public class OrderMethods {
             result.last();
             int size = result.getRow();
             result.beforeFirst();
-            System.out.println(size);
             if (size < 2) {
                 while (result.next()) {
                     time.getItems().remove(result.getString(1));
@@ -78,5 +79,78 @@ public class OrderMethods {
         } catch (IOException e) {
             System.out.println(e);
         }
+    }
+
+    public static boolean inputChecks(TextField firstName, TextField lastName, TextField emailAddress, TextField phoneNumber, TextField address, TextField city, TextField zip, ComboBox<String> brand, ComboBox<String> model, TextField spz, TextField yearOfProd, ComboBox<String> time, DatePicker date) {
+        String style = "-fx-background-color: #ffdbc7; -fx-border-color: lightgray; -fx-background-radius: 5; -fx-border-radius: 5";
+        String errorMessage;
+        if (!firstName.getText().equals("") && !lastName.getText().equals("") && !emailAddress.getText().equals("") && !phoneNumber.getText().equals("") && !address.getText().equals("") && !city.getText().equals("") && !zip.getText().equals("") && !brand.getSelectionModel().isEmpty() && !model.getSelectionModel().isEmpty() && !spz.getText().equals("") && !yearOfProd.getText().equals("")) {
+            if (!time.getSelectionModel().isEmpty() && date.getValue() != null) {
+                if (Validators.isValidEmail(emailAddress.getText())) {
+                    if (Validators.isValidPhoneNumber(phoneNumber.getText())) {
+                        if (Validators.isValidAddress(address.getText())) {
+                            if (Validators.isValidCity(city.getText())) {
+                                if (Validators.isValidZIP(zip.getText())) {
+                                    if (Validators.isValidSPZ(spz.getText())) {
+                                        if (Validators.isValidYearOfProd(yearOfProd.getText())) {
+                                            if (!time.getValue().equals("Všechny časy jsou zabrány")) {
+                                                return true;
+                                            } else {
+                                                errorMessage = "Je nutné vybrat jiný datum a čas";
+                                                time.setStyle(style);
+                                            }
+                                        } else {
+                                            errorMessage = "Neplatný rok výroby";
+                                            yearOfProd.setStyle(style);
+                                        }
+                                    } else {
+                                        errorMessage = "SPZ je neplatná";
+                                        spz.setStyle(style);
+                                    }
+                                } else {
+                                    errorMessage = "PSČ je krátké nebo příliš dlouhé";
+                                    zip.setStyle(style);
+                                }
+                            } else {
+                                errorMessage = "Město je neplatné";
+                                city.setStyle(style);
+                            }
+                        } else {
+                            errorMessage = "Adresa je neplatná";
+                            address.setStyle(style);
+                        }
+                    } else {
+                        errorMessage = "Neplatné telefonní číslo";
+                        phoneNumber.setStyle(style);
+                    }
+                } else {
+                    errorMessage = "Neplatný email";
+                    emailAddress.setStyle(style);
+                }
+            } else {
+                errorMessage = "Je nutno vybrat datum a čas";
+                date.setStyle("-fx-border-color: #ffdbc7");
+                time.setStyle(style);
+            }
+        } else {
+            errorMessage = "Je nutno vyplnit všechny povinné údaje (*)";
+            firstName.setStyle(style);
+            lastName.setStyle(style);
+            time.setStyle(style);
+            yearOfProd.setStyle(style);
+            spz.setStyle(style);
+            zip.setStyle(style);
+            city.setStyle(style);
+            address.setStyle(style);
+            phoneNumber.setStyle(style);
+            emailAddress.setStyle(style);
+            date.setStyle("-fx-border-color: red");
+            time.setStyle(style);
+            brand.setStyle(style);
+            model.setStyle(style);
+        }
+
+        callErrorMessage(errorMessage, "Chybová hláška");
+        return false;
     }
 }

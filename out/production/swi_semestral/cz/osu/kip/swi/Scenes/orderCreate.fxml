@@ -24,19 +24,19 @@
                             <children>
                                 <AnchorPane prefHeight="200.0" prefWidth="257.0" HBox.hgrow="ALWAYS">
                                     <children>
-                                        <TextField fx:id="firstName" layoutX="54.0" layoutY="38.0" />
+                                        <TextField fx:id="firstName" layoutX="54.0" layoutY="38.0" onMouseClicked="#resetColor" />
                                         <Label layoutX="54.0" layoutY="21.0" text="Jméno*" />
                                     </children>
                                 </AnchorPane>
                                 <AnchorPane layoutX="10.0" layoutY="10.0" prefHeight="200.0" prefWidth="257.0" HBox.hgrow="ALWAYS">
                                     <children>
-                                        <TextField fx:id="emailAddress" layoutX="54.0" layoutY="38.0" />
+                                        <TextField fx:id="emailAddress" layoutX="54.0" layoutY="38.0" onMouseClicked="#resetColor" />
                                         <Label layoutX="54.0" layoutY="21.0" text="Email*" />
                                     </children>
                                 </AnchorPane>
                                 <AnchorPane layoutX="267.0" layoutY="10.0" prefHeight="200.0" prefWidth="257.0" HBox.hgrow="ALWAYS">
                                     <children>
-                                        <ComboBox fx:id="brand" layoutX="54.0" layoutY="38.0" onAction="#brandSelection" prefWidth="150.0" />
+                                        <ComboBox fx:id="brand" layoutX="54.0" layoutY="38.0" onAction="#brandSelection" onMouseClicked="#resetColor" prefWidth="150.0" />
                                         <Label layoutX="54.0" layoutY="21.0" text="Značka automobilu*" />
                                     </children>
                                 </AnchorPane>
@@ -46,19 +46,19 @@
                             <children>
                                 <AnchorPane prefHeight="200.0" prefWidth="257.0" HBox.hgrow="ALWAYS">
                                     <children>
-                                        <TextField fx:id="lastName" layoutX="54.0" layoutY="38.0" />
+                                        <TextField fx:id="lastName" layoutX="54.0" layoutY="38.0" onMouseClicked="#resetColor" />
                                         <Label layoutX="54.0" layoutY="21.0" text="Příjmení*" />
                                     </children>
                                 </AnchorPane>
                                 <AnchorPane layoutX="10.0" layoutY="10.0" prefHeight="200.0" prefWidth="257.0" HBox.hgrow="ALWAYS">
                                     <children>
-                                        <TextField fx:id="phoneNumber" layoutX="54.0" layoutY="38.0" />
+                                        <TextField fx:id="phoneNumber" layoutX="54.0" layoutY="38.0" onMouseClicked="#resetColor" />
                                         <Label layoutX="54.0" layoutY="21.0" text="Telefon*" />
                                     </children>
                                 </AnchorPane>
                                 <AnchorPane layoutX="267.0" layoutY="10.0" prefHeight="200.0" prefWidth="257.0" HBox.hgrow="ALWAYS">
                                     <children>
-                                        <ComboBox fx:id="model" layoutX="54.0" layoutY="38.0" prefWidth="150.0" />
+                                        <ComboBox fx:id="model" layoutX="54.0" layoutY="38.0" onMouseClicked="#resetColor" prefWidth="150.0" />
                                         <Label layoutX="54.0" layoutY="21.0" text="Model automobilu*" />
                                     </children>
                                 </AnchorPane>
@@ -74,13 +74,13 @@
                                 </AnchorPane>
                                 <AnchorPane layoutX="10.0" layoutY="10.0" prefHeight="200.0" prefWidth="257.0" HBox.hgrow="ALWAYS">
                                     <children>
-                                        <TextField fx:id="address" layoutX="54.0" layoutY="38.0" />
+                                        <TextField fx:id="address" layoutX="54.0" layoutY="38.0" onMouseClicked="#resetColor" />
                                         <Label layoutX="54.0" layoutY="21.0" text="Ulice a č.p.*" />
                                     </children>
                                 </AnchorPane>
                                 <AnchorPane layoutX="267.0" layoutY="10.0" prefHeight="200.0" prefWidth="257.0" HBox.hgrow="ALWAYS">
                            <children>
-                                        <TextField fx:id="spz" layoutX="54.0" layoutY="38.0" />
+                                        <TextField fx:id="spz" layoutX="54.0" layoutY="38.0" onMouseClicked="#resetColor" />
                                         <Label layoutX="59.0" layoutY="21.0" text="SPZ*" />
                            </children>
                                 </AnchorPane>
@@ -90,19 +90,19 @@
                             <children>
                                 <AnchorPane prefHeight="200.0" prefWidth="257.0" HBox.hgrow="ALWAYS">
                                     <children>
-                                        <DatePicker fx:id="date" layoutX="54.0" layoutY="31.0" onAction="#dateSelection" prefHeight="25.0" prefWidth="149.0" />
+                                        <DatePicker fx:id="date" layoutX="54.0" layoutY="31.0" onAction="#dateSelection" onMouseClicked="#resetColor" prefHeight="25.0" prefWidth="149.0" />
                                         <Label layoutX="55.0" layoutY="13.0" text="Datum*" />
                                     </children>
                                 </AnchorPane>
                                 <AnchorPane layoutX="10.0" layoutY="10.0" prefHeight="200.0" prefWidth="257.0" HBox.hgrow="ALWAYS">
                                     <children>
-                                        <TextField fx:id="city" layoutX="54.0" layoutY="38.0" />
+                                        <TextField fx:id="city" layoutX="54.0" layoutY="38.0" onMouseClicked="#resetColor" />
                                         <Label layoutX="54.0" layoutY="21.0" text="Město*" />
                                     </children>
                                 </AnchorPane>
                                 <AnchorPane layoutX="267.0" layoutY="10.0" prefHeight="200.0" prefWidth="257.0" HBox.hgrow="ALWAYS">
                            <children>
-                                        <TextField fx:id="yearOfProd" layoutX="54.0" layoutY="38.0" />
+                                        <TextField fx:id="yearOfProd" layoutX="54.0" layoutY="38.0" onMouseClicked="#resetColor" />
                                         <Label layoutX="54.0" layoutY="21.0" text="Rok výroby*" />
                            </children>
                                 </AnchorPane>
@@ -112,13 +112,13 @@
                             <children>
                                 <AnchorPane prefHeight="200.0" prefWidth="257.0" HBox.hgrow="ALWAYS">
                                     <children>
-                                        <ComboBox fx:id="time" layoutX="54.0" layoutY="39.0" onAction="#timeSelection" prefWidth="150.0" />
+                                        <ComboBox fx:id="time" layoutX="54.0" layoutY="39.0" onMouseClicked="#resetColor" prefWidth="150.0" />
                                         <Label layoutX="54.0" layoutY="22.0" text="Čas*" />
                                     </children>
                                 </AnchorPane>
                                 <AnchorPane layoutX="10.0" layoutY="10.0" prefHeight="200.0" prefWidth="257.0" HBox.hgrow="ALWAYS">
                                     <children>
-                                        <TextField fx:id="zip" layoutX="54.0" layoutY="38.0" />
+                                        <TextField fx:id="zip" layoutX="54.0" layoutY="38.0" onMouseClicked="#resetColor" />
                                         <Label layoutX="54.0" layoutY="21.0" text="PSČ*" />
                                     </children>
                                 </AnchorPane>

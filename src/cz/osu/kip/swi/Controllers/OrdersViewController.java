@@ -8,7 +8,6 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -17,8 +16,8 @@ import javafx.scene.layout.Region;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.net.URL;
-import java.util.ResourceBundle;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 public class OrdersViewController {
 
@@ -75,6 +74,9 @@ public class OrdersViewController {
     @FXML
     private Button refreshButton;
 
+    @FXML
+    private ComboBox<String> comboBoxPicker;
+
     ObservableList<Order> list;
 
     public void initialize(OrdersViewController controller) {
@@ -103,15 +105,13 @@ public class OrdersViewController {
         if (mode == QueryModes.FILTERED) {
             if (searchTextField.isVisible()) {
                 list = Database.getDataOrder(searchTextField.getText(), searchCategory.getValue(), controller);
-            } else {
+            } else if (datePicker.isVisible()) {
                 list = Database.getDataOrder(datePicker.getValue().toString(), searchCategory.getValue(), controller);
+            } else if (comboBoxPicker.isVisible()){
+                list = Database.getDataOrder(comboBoxPicker.getValue(), searchCategory.getValue(), controller);
             }
         }
         orderList.setItems(list);
-    }
-
-    public void printText() {
-        System.out.println("TEXT");
     }
 
     @FXML
@@ -143,15 +143,21 @@ public class OrdersViewController {
                 loadFromDatabase(QueryModes.EVERYTHING);
             }
         } else if (datePicker.isVisible()) {
-            if (datePicker.getValue() != null && (!searchCategory.getValue().equals("Objednáno") || !searchCategory.getValue().equals("Rozpracováno") || !searchCategory.getValue().equals("Dokončeno") || !searchCategory.getValue().equals("Zrušeno"))) {
-                loadFromDatabase(QueryModes.FILTERED);
-            } else {
-                loadFromDatabase(QueryModes.EVERYTHING);
-            }
+            checkIfValueIsNull(datePicker.getValue() != null);
+        } else if (comboBoxPicker.isVisible()){
+            checkIfValueIsNull(comboBoxPicker.getValue() != null);
         }
 
         searchTextField.setText("");
         datePicker.setValue(null);
+    }
+
+    private void checkIfValueIsNull(boolean b) {
+        if (b && (!searchCategory.getValue().equals("Objednáno") || !searchCategory.getValue().equals("Rozpracováno") || !searchCategory.getValue().equals("Dokončeno") || !searchCategory.getValue().equals("Zrušeno"))) {
+            loadFromDatabase(QueryModes.FILTERED);
+        } else {
+            loadFromDatabase(QueryModes.EVERYTHING);
+        }
     }
 
     @FXML
@@ -159,9 +165,41 @@ public class OrdersViewController {
         if (searchCategory.getValue().equals("Datum")) {
             searchTextField.setVisible(false);
             datePicker.setVisible(true);
+        } else if (searchCategory.getValue().equals("Model") || searchCategory.getValue().equals("Značka")) {
+            if (searchTextField.isVisible()) {
+                searchTextField.setVisible(false);
+                comboBoxPicker.setVisible(true);
+            } else {
+                datePicker.setVisible(false);
+                comboBoxPicker.setVisible(true);
+            }
+            if (searchCategory.getValue().equals("Značka")) {
+                comboBoxPicker.getItems().removeAll(comboBoxPicker.getItems());
+                try (ResultSet result = Database.getVehicleBrands()) {
+                    while (result.next()) {
+                        comboBoxPicker.getItems().add(result.getString("brand"));
+                    }
+                } catch (SQLException e) {
+                    System.out.println(e);
+                }
+            } else if (searchCategory.getValue().equals("Model")) {
+                comboBoxPicker.getItems().removeAll(comboBoxPicker.getItems());
+                try (ResultSet result = Database.getVehicleModels()) {
+                    while (result.next()) {
+                        comboBoxPicker.getItems().add(result.getString("model"));
+                    }
+                } catch (SQLException e) {
+                    System.out.println(e);
+                }
+            }
         } else {
-            searchTextField.setVisible(true);
-            datePicker.setVisible(false);
+            if (comboBoxPicker.isVisible()) {
+                comboBoxPicker.setVisible(false);
+                searchTextField.setVisible(true);
+            } else if (datePicker.isVisible()) {
+                datePicker.setVisible(false);
+                searchTextField.setVisible(true);
+            }
         }
     }
 
@@ -169,5 +207,7 @@ public class OrdersViewController {
     public void refreshOrders(ActionEvent event) {
         loadFromDatabase(QueryModes.EVERYTHING);
     }
+
+
 
 }
