@@ -1,0 +1,82 @@
+$main-background-c: #282a36;     /* Main Window, Bottom Bar, Doc View, Sticky Top, Pages, Queue */
+$secondary-background-c: #44475a;   /* Sidebar, Quotes, icons, Portals, Embedded Search, Settings Menu */
+$elevated-background-c: #44475a;   /* Queue Cards, Popups */
+$button-success-c: #50fa7b;
+$button-success-c-hover: #36AA54;
+$border-c: #555;
+$main-font-spacing: 0.01em;
+$bold-font-spacing: 0.02em;
+$semiwide-font-spacing: 0.05em;
+$wide-font-spacing: 0.1em;
+
+$mandatory: #ff5555	;
+
+body{
+    color: white;
+    background-color: $main-background-c;
+}
+
+::selection{
+    background: $elevated-background-c
+}
+
+.form-label {
+    color: white;
+
+    span {
+        color: $mandatory;
+    }
+}
+
+.btn-success{
+    color: black;
+    background-color: $button-success-c;
+    border-color: $button-success-c;
+    font-weight: bold;
+}
+
+.btn-success:hover{
+    color:black;
+    background-color: $button-success-c-hover;
+}
+
+.form-control::selection{
+    color: white;
+    background-color: #3297FD;
+}
+
+.alert-danger{
+    background-color: $mandatory;
+    border-color: $mandatory;
+    color: #53141A;
+}
+
+.close{
+    line-height: 0.75;
+    span{
+        color: #280707;
+    }
+    
+}
+
+.popup{
+    display: block;
+    background-color: rgba(39, 41, 53, 0.35);
+
+    .jumbotron{
+        background-color: $main-background-c;
+    }
+}
+
+.modal{
+    
+    .modal-content{
+        background-color: $main-background-c;
+    }
+
+    .modal-header{
+        span{
+            color: white;
+        }
+    }
+}

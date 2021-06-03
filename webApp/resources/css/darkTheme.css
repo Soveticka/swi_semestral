@@ -1,0 +1,77 @@
+/* Main Window, Bottom Bar, Doc View, Sticky Top, Pages, Queue */
+/* Sidebar, Quotes, icons, Portals, Embedded Search, Settings Menu */
+/* Queue Cards, Popups */
+body {
+  color: white;
+  background-color: #282a36;
+}
+
+::-moz-selection {
+  background: #44475a;
+}
+
+::selection {
+  background: #44475a;
+}
+
+.form-label {
+  color: white;
+}
+
+.form-label span {
+  color: #ff5555;
+}
+
+.btn-success {
+  color: black;
+  background-color: #50fa7b;
+  border-color: #50fa7b;
+  font-weight: bold;
+}
+
+.btn-success:hover {
+  color: black;
+  background-color: #36AA54;
+}
+
+.form-control::-moz-selection {
+  color: white;
+  background-color: #3297FD;
+}
+
+.form-control::selection {
+  color: white;
+  background-color: #3297FD;
+}
+
+.alert-danger {
+  background-color: #ff5555;
+  border-color: #ff5555;
+  color: #53141A;
+}
+
+.close {
+  line-height: 0.75;
+}
+
+.close span {
+  color: #280707;
+}
+
+.popup {
+  display: block;
+  background-color: rgba(39, 41, 53, 0.35);
+}
+
+.popup .jumbotron {
+  background-color: #282a36;
+}
+
+.modal .modal-content {
+  background-color: #282a36;
+}
+
+.modal .modal-header span {
+  color: white;
+}
+/*# sourceMappingURL=darkTheme.css.map */
