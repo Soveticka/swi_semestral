@@ -33,8 +33,8 @@ function createPopup($message, $mode): void
                 var inst = setInterval(change, 1000);
             
                 function change() {
-                    elem.innerHTML = counter;
                     counter--;
+                    elem.innerHTML = counter;
                     if (counter <= 0) {
                         counter = 0;
                         clearInterval(inst); // uncomment this if you want to stop refreshing after one cycle

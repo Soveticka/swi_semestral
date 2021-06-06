@@ -36,4 +36,12 @@ function isValidYearOfProd($year): bool
     return intval($year) > 1855 && intval($year) <= date("Y");
 }
 
+function timeIsFree($time, $date, $conn): bool
+{
+    if (mysqli_num_rows(mysqli_query($conn, 'SELECT * FROM ' . _ORDERS . ' WHERE dateI="' . $date . '" AND timeI="' . $time . '"')) > 0){
+        return false;
+    }
+    return true;
+}
+
 ?>

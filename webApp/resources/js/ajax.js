@@ -18,21 +18,14 @@ function getFreeTimeByDate(str) {
         url: 'func/getFreeTime.php?q=' + str,
         type: "get",
         success: function (msg) {
-            parentTimeSelect.innerHTML = '';
-            parentTimeSelect.removeAttribute("disabled");
             $("#date > span.error-message").remove();
-            if (msg.length <= 3) {
+            if (parseInt(msg) >= 2) {
+                parentTimeSelect.innerHTML = '';
                 var option = document.createElement("option");
                 option.setAttribute("value", "0");
                 option.text = "Všechny časy jsou zabrány";
                 parentTimeSelect.appendChild(option);
                 parentTimeSelect.setAttribute("disabled", "");
-            }
-            for (let i = 0; i < msg.length; i++) {
-                var option = document.createElement("option");
-                option.setAttribute("value", msg[i]);
-                option.text = msg[i];
-                parentTimeSelect.appendChild(option);
             }
         },
         dataType: "json"

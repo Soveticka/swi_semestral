@@ -121,14 +121,22 @@ $result_Model = mysqli_query($conn, 'SELECT * FROM ' . _VEHICLE_MODEL . '');
         <div class="row mb-3">
             <div class="col-4">
                 <label class="form-label" for="timeI">Čas <span>*</span></label>
-                <select class="form-select form-control" id="timeI" name="timeI" required="" <?php if (!isset($_SESSION['timeI'])) echo 'disabled=""'; ?>>
+                <select class="form-select form-control" id="timeI" name="timeI" required="">
                     <?php
-                    if (isset($_SESSION['timeI'])) {
+                    //if (isset($_SESSION['timeI'])) {
                         require_once "./func/getFreeTime.php";
                         getFreeTime($_SESSION['timeI'], $_SESSION['dateI'], $conn);
-                    }
+                    //}
                     ?>
                 </select>
+                <?php
+                if (isset($_GET['errTime'])) {
+                    echo '<div class="alert alert-danger alert-dismissible fade show mt-1 mb-0" role="alert">';
+                    echo 'Vybraný čas je již zarezervován, vyberte prosím jiný';
+                    echo '<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>';
+                    echo '</div>';
+                }
+                ?>
             </div>
             <div class="col-4">
                 <label class="form-label" for="zip">PSČ <span>*</span></label>
@@ -171,6 +179,7 @@ if (isset($_POST['submit'])) {
     if (!isValidZip($_POST['zip'])) $errors .= "errZip&";
     if (!isValidSPZ($_POST['spz'])) $errors .= "errSpz&";
     if (!isValidYearOfProd($_POST['yearOfProduction'])) $errors .= "errYoF&";
+    if (!timeIsFree($_POST['timeI'], $_POST['dateI'], $conn)) $errors .= "errTime&";
     $_SESSION['firstName'] = $_POST['firstName'];
     $_SESSION['lastName'] = $_POST['lastName'];
     $_SESSION['emailaddress'] = $_POST['emailaddress'];
