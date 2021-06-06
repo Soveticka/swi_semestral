@@ -161,10 +161,7 @@ $result_Model = mysqli_query($conn, 'SELECT * FROM ' . _VEHICLE_MODEL . '');
         </div>
     </form>
 <?php
-if($_SESSION[_RESET_SESSION]){
-    session_unset();
-    session_destroy();
-}
+
 
 if (isset($_POST['submit'])) {
     $errors = "";

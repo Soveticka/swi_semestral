@@ -207,7 +207,4 @@ public class OrdersViewController {
     public void refreshOrders(ActionEvent event) {
         loadFromDatabase(QueryModes.EVERYTHING);
     }
-
-
-
 }

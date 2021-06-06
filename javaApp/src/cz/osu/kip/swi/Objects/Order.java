@@ -47,7 +47,6 @@ public class Order {
         {
             btn.setOnAction((ActionEvent event) -> {
                 Stage orderEditStage = new Stage();
-
                 // - Vyhození error okna
                 try {
                     FXMLLoader loader = new FXMLLoader(Main.class.getResource("Scenes/orderEdit.fxml"));

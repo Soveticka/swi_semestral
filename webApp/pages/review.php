@@ -8,6 +8,8 @@ if (!isset($_GET['p']) || $_GET['p'] != 'review' || !$_SESSION[_REVIEW_ENABLE]) 
 }
 
 ?>
+<h1>Rezervační systém</h1>
+<h2>Rekapitulace objednávky</h2>
 <form action="" method="POST">
     <div class="row mb-3">
         <div class="col-4">
@@ -127,8 +129,13 @@ if (isset($_POST['submit'])) {
         ")";
     if (mysqli_query($conn, $query)) {
         require_once "./func/popup.php";
-        createPopup("Rezervace úspěšně vytvořena, za 5s budete přesměrováni na hlavní stránku.", "Úspěch");
-        sleep(5);
+        createPopup("Rezervace úspěšně vytvořena, za <span id='countdown'>5</span>s budete přesměrováni na hlavní stránku.", "Úspěch");
+        // - TODO - Nefunkční popup kvůli sleep
+        //sleep(5);
+        //createPopup("Test.", "Úspěch");
+        /*$_SESSION[_RESET_SESSION] = true;
+        header('Location: ./');
+        exit();*/
     } else {
         require_once "./func/popup.php";
         createPopup("Během vytváření rezervace se něco nezdařilo, zkuste to prosím později. <br> Pokud i nadále nebudete moct vytvořit rezervaci, kontaktujte autoservis: kontakt!", "Error");
@@ -136,7 +143,6 @@ if (isset($_POST['submit'])) {
 }
 
 if (isset($_POST['edit'])) {
-    $_SESSION[_RESET_SESSION] = true;
     header('Location: ./');
     exit();
 }

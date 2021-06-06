@@ -6,9 +6,14 @@
 
     $page = $_GET['p'];
 
-    if($page == 'review'){
+    if ($_SESSION[_RESET_SESSION]) {
+        session_unset();
+        session_destroy();
+    }
+
+    if ($page == 'review') {
         include "./pages/review.php";
-    }else{
+    } else {
         include "./pages/createOrder.php";
     }
 
