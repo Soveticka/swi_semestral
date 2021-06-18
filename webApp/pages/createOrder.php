@@ -53,6 +53,9 @@ $result_Model = mysqli_query($conn, 'SELECT * FROM ' . _VEHICLE_MODEL . '');
                     if (isset($_SESSION['vehicleModel'])) {
                         require_once "./func/getVehicleModel.php";
                         getVehicleModel($_SESSION['vehicleModel'], $_SESSION['vehicleBrand'], $conn);
+                    }else{
+                        require_once "./func/getVehicleModel.php";
+                        getVehicleModel("", "Audi", $conn);
                     }
                     ?>
                 </select>
@@ -91,7 +94,7 @@ $result_Model = mysqli_query($conn, 'SELECT * FROM ' . _VEHICLE_MODEL . '');
         <div class="row mb-3">
             <div class="col-4" id="date">
                 <label class="form-label" for="dateI">Datum <span>*</span></label>
-                <input class="form-select form-control" id="dateI" type="date" name="dateI" required="" oninput="getFreeTimeByDate(this.value)" <?php if (isset($_SESSION['dateI'])) echo "value='" . $_SESSION['dateI'] . "'" ?>>
+                <input class="form-select form-control" id="dateI" type="date" name="dateI" required="" <?php if (isset($_SESSION['dateI'])) echo "value='" . $_SESSION['dateI'] . "'" ?>>
             </div>
             <div class="col-4">
                 <label class="form-label" for="city">Město <span>*</span></label>

@@ -130,12 +130,6 @@ if (isset($_POST['submit'])) {
     if (mysqli_query($conn, $query)) {
         require_once "./func/popup.php";
         createPopup("Rezervace úspěšně vytvořena, za <span id='countdown'>5</span>s budete přesměrováni na hlavní stránku.", "Úspěch");
-        // - TODO - Nefunkční popup kvůli sleep
-        //sleep(5);
-        //createPopup("Test.", "Úspěch");
-        /*$_SESSION[_RESET_SESSION] = true;
-        header('Location: ./');
-        exit();*/
     } else {
         require_once "./func/popup.php";
         createPopup("Během vytváření rezervace se něco nezdařilo, zkuste to prosím později. <br> Pokud i nadále nebudete moct vytvořit rezervaci, kontaktujte autoservis: kontakt!", "Error");
