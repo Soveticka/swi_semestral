@@ -9,7 +9,6 @@
     <script src="./resources/js/jquery-3.6.0.min.js"></script>
     <script src="./resources/bootstrap/bootstrap.bundle.js"></script>
     <script src="./resources/js/ajax.js"></script>
-    <!-- <script src="./resources/js/selectize.min.js"></script> -->
 </head>
 <body>
 <div class="container mt-5">

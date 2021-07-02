@@ -13,29 +13,29 @@ if (!isset($_GET['p']) || $_GET['p'] != 'review' || !$_SESSION[_REVIEW_ENABLE]) 
 <form action="" method="POST">
     <div class="row mb-3">
         <div class="col-4">
-            <label class="form-label" for="firstName">Jméno<span class="text-danger">*</span></label>
+            <label class="form-label" for="firstName">Jméno</label>
             <input class="form-control" type="text" id="firstName" name="firstName" required readonly <?php if (isset($_SESSION['firstName'])) echo "value='" . $_SESSION['firstName'] . "'" ?>>
         </div>
         <div class="col-4">
-            <label class="form-label" for="emailaddress">Email<span class="text-danger">*</span></label>
+            <label class="form-label" for="emailaddress">Email</label>
             <input class="form-control" type="email" id="emailaddress" name="emailaddress" readonly <?php if (isset($_SESSION['emailaddress'])) echo "value='" . $_SESSION['emailaddress'] . "'" ?>>
         </div>
         <div class="col-4">
-            <label class="form-label" for="vehicleBrand">Značka automobilu<span class="text-danger">*</span></label>
+            <label class="form-label" for="vehicleBrand">Značka automobilu</label>
             <input class="form-control" type="text" id="vehicleBrand" name="vehicleBrand" readonly <?php if (isset($_SESSION['vehicleBrand'])) echo "value='" . $_SESSION['vehicleBrand'] . "'" ?>>
         </div>
     </div>
     <div class="row mb-3">
         <div class="col-4">
-            <label class="form-label" for="lastName">Příjmení<span class="text-danger">*</span></label>
+            <label class="form-label" for="lastName">Příjmení</label>
             <input class="form-control" type="text" id="lastName" name="lastName" readonly <?php if (isset($_SESSION['lastName'])) echo "value='" . $_SESSION['lastName'] . "'" ?>>
         </div>
         <div class="col-4">
-            <label class="form-label" for="phonenumber">Telefon<span class="text-danger">*</span></label>
+            <label class="form-label" for="phonenumber">Telefon</label>
             <input class="form-control" type="text" id="phonenumber" name="phonenumber" readonly <?php if (isset($_SESSION['phonenumber'])) echo "value='" . $_SESSION['phonenumber'] . "'" ?>>
         </div>
         <div class="col-4">
-            <label class="form-label" for="vehicleModel">Model automobilu<span class="text-danger">*</span></label>
+            <label class="form-label" for="vehicleModel">Model automobilu</label>
             <input class="form-control" type="text" id="vehicleModel" name="vehicleModel" readonly <?php if (isset($_SESSION['vehicleModel'])) echo "value='" . $_SESSION['vehicleModel'] . "'" ?>>
         </div>
     </div>
@@ -45,35 +45,35 @@ if (!isset($_GET['p']) || $_GET['p'] != 'review' || !$_SESSION[_REVIEW_ENABLE]) 
             <input class="form-control" type="text" id="ico" name="ico" readonly <?php if (isset($_SESSION['ico'])) echo "value='" . $_SESSION['ico'] . "'" ?>>
         </div>
         <div class="col-4">
-            <label class="form-label" for="address">Ulice a č.p<span class="text-danger">*</span></label>
+            <label class="form-label" for="address">Ulice a č.p</label>
             <input class="form-control" type="text" id="address" name="address" readonly <?php if (isset($_SESSION['address'])) echo "value='" . $_SESSION['address'] . "'" ?>>
         </div>
         <div class="col-4">
-            <label class="form-label" for="spz">SPZ<span class="text-danger">*</span></label>
+            <label class="form-label" for="spz">SPZ</label>
             <input class="form-control" type="text" id="spz" name="spz" readonly <?php if (isset($_SESSION['spz'])) echo "value='" . $_SESSION['spz'] . "'" ?>>
         </div>
     </div>
     <div class="row mb-3">
         <div class="col-4" id="date">
-            <label class="form-label" for="dateI">Datum<span class="text-danger">*</span></label>
+            <label class="form-label" for="dateI">Datum</label>
             <input class="form-select form-control" id="dateI" type="date" name="dateI" readonly oninput="getFreeTimeByDate(this.value)" <?php if (isset($_SESSION['dateI'])) echo "value='" . $_SESSION['dateI'] . "'" ?>>
         </div>
         <div class="col-4">
-            <label class="form-label" for="city">Město<span class="text-danger">*</span></label>
+            <label class="form-label" for="city">Město</label>
             <input class="form-control" type="text" id="city" readonly name="city" <?php if (isset($_SESSION['city'])) echo "value='" . $_SESSION['city'] . "'" ?>>
         </div>
         <div class="col-4">
-            <label class="form-label" for="yearOfProduction">Rok výroby<span class="text-danger">*</span></label>
+            <label class="form-label" for="yearOfProduction">Rok výroby</label>
             <input class="form-control" type="text" id="yearOfProduction" name="yearOfProduction" readonly <?php if (isset($_SESSION['yearOfProduction'])) echo "value='" . $_SESSION['yearOfProduction'] . "'" ?>>
         </div>
     </div>
     <div class="row mb-3">
         <div class="col-4">
-            <label class="form-label" for="timeI">Čas<span class="text-danger">*</span></label>
+            <label class="form-label" for="timeI">Čas</label>
             <input class="form-control" type="text" id="timeI" name="timeI" readonly <?php if (isset($_SESSION['timeI'])) echo "value='" . $_SESSION['timeI'] . "'" ?>>
         </div>
         <div class="col-4">
-            <label class="form-label" for="zip">PSČ<span class="text-danger">*</span></label>
+            <label class="form-label" for="zip">PSČ</label>
             <input class="form-control" type="text" id="zip" readonly name="zip" <?php if (isset($_SESSION['zip'])) echo "value='" . $_SESSION['zip'] . "'" ?>>
         </div>
         <div class="col-4 d-xl-flex align-items-xl-center">
