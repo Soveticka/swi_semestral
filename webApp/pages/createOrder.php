@@ -126,10 +126,8 @@ $result_Model = mysqli_query($conn, 'SELECT * FROM ' . _VEHICLE_MODEL . '');
                 <label class="form-label" for="timeI">Čas <span>*</span></label>
                 <select class="form-select form-control" id="timeI" name="timeI" required="">
                     <?php
-                    //if (isset($_SESSION['timeI'])) {
                         require_once "./func/getFreeTime.php";
                         getFreeTime($_SESSION['timeI'], $_SESSION['dateI'], $conn);
-                    //}
                     ?>
                 </select>
                 <?php
